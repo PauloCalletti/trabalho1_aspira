@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <title>Registration Book And Periodical</title>
+</head>
+<body >
+   <h1>
+      Include Book or Periodical
+   </h1>
+<div class="answer">
+
+</div>
+   <div class="form-select">
+      <form id="formselect">
+         <select id="selection">
+            <option value="">Select the Include</option>
+            <option value="sbook">Book</option>
+            <option value="speriodical">Periodical</option>
+            
+         </select>
+
+      </form>
+   </div>
+<div class="form-book">
+   <form id="formb">
+      ISBN: <input id="isbn" type="number"  placeholder="Only Numbers">
+      Edition: <input id="edition" type="number" placeholder="Only Numbers">
+      Volume: <input id="volume" type="number" placeholder="Only Numbers">
+      <br><br>
+      Title: <input id="titleb" placeholder="Type The Title">
+      Subtitle: <input id="subtitleb" placeholder="Type The Subtitle">
+      Published At: <input id="publishedatb" type="date">
+      Author: <input id="authorb" placeholder="Type The Author">
+
+      <!-- <select id="authorb">
+
+      </select> -->
+      
+      <br><br></br><button>SUBMIT</button>
+   </form>
+</div>
+<div class="form-periodical">
+   <form id="formp">
+      ISSN: <input id="issn" type="number" placeholder="Only Numbers">
+      Volume: <input id="volumee" type="number" placeholder="Only Numbers">
+      ISSUE: <input id="issue" type="number" placeholder="Only Numbers">
+      <br><br>
+      Title: <input id="titlep" placeholder="Type The Title">
+      Subtitle: <input id="subtitlep" placeholder="Type The Subtitle">
+      Published At: <input id="publishedatp" type="date">
+      Author: <input id="authorp" placeholder="Type The Author">
+
+      <!-- <select id="authorp">
+
+      </select> -->
+      <br><br><br><button>SUBMIT</button>
+   </form>
+</div>
+   <script type="module" src="inc-book-perio.js"></script>
+</body>
+</html>
+
+
+
