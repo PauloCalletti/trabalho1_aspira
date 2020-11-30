@@ -10,7 +10,7 @@ const volume = document.querySelector<HTMLInputElement>('#volume')!
 const titleb = document.querySelector<HTMLInputElement>('#titleb')!
 const subtitleb = document.querySelector<HTMLInputElement>('#subtitleb')!
 const publishedAtb = document.querySelector<HTMLInputElement>('#publishedatb')!
-const authorb = document.querySelector<HTMLSelectElement>('#authorb')!
+let authorb = document.querySelector<HTMLSelectElement>('#authorb')!
 
 // Individual do Periodical
 const issn = document.querySelector<HTMLInputElement>('#issn')!
@@ -19,7 +19,7 @@ const volumee = document.querySelector<HTMLInputElement>('#volumee')!
 const titlep = document.querySelector<HTMLInputElement>('#titlep')!
 const subtitlep = document.querySelector<HTMLInputElement>('#subtitlep')!
 const publishedAtp = document.querySelector<HTMLInputElement>('#publishedatp')!
-const authorp = document.querySelector<HTMLSelectElement>('#authorp')!
+let authorp = document.querySelector<HTMLSelectElement>('#authorp')!
 
 
 // Funcionalidade
@@ -38,9 +38,26 @@ let author: Person [] = []
 showRegistersp()
 showRegistersb()
 
-
+   let persp: Array<Person> = JSON.parse(localStorage.getItem('peoples')!) 
+   let i = 0
+   for (const per of persp) {
+      const option = document.createElement('option')
+      option.value = i.toString()
+      option.innerText = per.name
+      authorp.append(option)
+      i++
+   }
+   
+   let persb: Array<Person> = JSON.parse(localStorage.getItem('peoples')!) 
+   for (const per of persb) {
+      const option = document.createElement('option')
+      option.value = i.toString()
+      option.innerText = per.name
+      authorb.append(option)
+      i++
+   }
    //Controla a Escolha do Usuário 
-   formselect.addEventListener('click', (e: Event) => {
+   formselect.addEventListener('change', (e: Event) => {
       e.preventDefault()
       if (!selection.value) {
          answer.className = 'no'
@@ -80,6 +97,9 @@ function shower() {
    //Controla o submit do Formulário Book
    formb.addEventListener('submit', (e: Event) => {
        e.preventDefault()
+      let authob = authorb.value
+      let persob = persb[parseInt(authob)] 
+
       
       if(!isbn.value) {
          answer.className = 'no'
@@ -122,11 +142,11 @@ function shower() {
          answer.innerText = 'Registered Successfully'
          
       }
-      
+      // let tk = pers[parseInt(author.value)]
       setTimeout(() => {
          try {
          const regb = new Book (
-            parseInt(isbn.value), parseInt(edition.value), parseInt(volume.value), titleb.value, subtitleb.value, new Date(`${publishedAtb.value}T00:00:00`), author.value)
+            parseInt(isbn.value), parseInt(edition.value), parseInt(volume.value), titleb.value, subtitleb.value, new Date(`${publishedAtb.value}T00:00:00`), persob)
                      
          registersb.push(regb)
          localStorage.setItem('Books', JSON.stringify(registersb))
@@ -146,6 +166,8 @@ function shower() {
    //Controla o submit do Formulário Periodical
    formp.addEventListener('submit', (e: Event) => {
       e.preventDefault()
+      let authop = authorp.value
+      let persop = persp[parseInt(authop)]
 
          if(!issn.value) {
          answer.className = 'no'
@@ -189,10 +211,11 @@ function shower() {
          answer.innerText = 'Registered Successfully'
          
       }
+
      setTimeout(() => {
       try {
       const regp = new Periodical (
-         parseInt(issn.value), parseInt(volumee.value), parseInt(issue.value), titlep.value, subtitlep.value, new Date(`${publishedAtp.value}T00:00:00`), authorp.value)
+         parseInt(issn.value), parseInt(volumee.value), parseInt(issue.value), titlep.value, subtitlep.value, new Date(`${publishedAtp.value}T00:00:00`), persop)
                   
       registersp.push(regp)
       localStorage.setItem('Periodicals', JSON.stringify(registersp))
@@ -209,6 +232,7 @@ function shower() {
    }, 1)
   }) 
 
+   
 // Função para mostrar o conteúdo do localStorage quando com BOOK
 function showRegistersb () {
    if(localStorage.getItem('Books')){
@@ -267,6 +291,7 @@ function showRegistersb () {
             ${lines}
       </tbody>
    `
+   
 }
 // Função para mostrar o conteúdo do localStorage quando com PERIODICAL
 function showRegistersp () {
@@ -324,5 +349,7 @@ function showRegistersp () {
             ${lines}
       </tbody>
    `
+   
+   
 }
 
